@@ -2,7 +2,7 @@
 
 ## 1. Estilo arquitectónico
 
-Se adopta una **arquitectura en tres capas**. Cada capa tiene sus propias responsabilidades y se comunica con la capa inmediata inferior. Esta decisión responde principalmente a **DA07 (mantenibilidad)** y **DA05 (API REST)**.
+Se adopta una **arquitectura en tres capas**. Cada capa tiene sus propias responsabilidades y se comunica con la capa inmediata inferior. Esta decisión responde principalmente a **DA06 (mantenibilidad)** y **DA05 (API REST)**.
 
 | Capa | Pregunta que responde | Responsabilidad |
 |---|---|---|
@@ -31,9 +31,9 @@ Se adopta una **arquitectura en tres capas**. Cada capa tiene sus propias respon
 | Sistema externo | Módulo que lo usa | Propósito | Driver |
 |---|---|---|---|
 | Pasarela de pago | Pedidos | Procesar el pago del pedido | DA04 |
-| Servicio de envío | Pedidos | Registrar la entrega y obtener el seguimiento | DA06 |
-| Servicio de facturación | Pedidos | Emitir boleta o factura electrónica | DA06 |
-| ERP | Catálogo | Sincronizar productos y stock | DA06 |
+| Servicio de envío | Pedidos | Registrar la entrega y obtener el seguimiento | DA07 |
+| Servicio de facturación | Pedidos | Emitir boleta o factura electrónica | DA07 |
+| ERP | Catálogo | Sincronizar productos y stock | DA07 |
 
 > **Decisión de diseño:** las integraciones se realizan desde la **capa de lógica de negocio** (módulos Pedidos y Catálogo), no desde la capa de datos. La base de datos solo almacena información; la decisión de cuándo cobrar, despachar o facturar es una regla de negocio.
 
@@ -143,5 +143,5 @@ Además, el módulo de **Pedidos** se integra con la **pasarela de pago**, el **
 | DA03 Seguridad | La autenticación y los roles se centralizan en el módulo Usuarios; los datos de tarjeta nunca pasan por la base de datos propia. |
 | DA04 Pasarela de pago | La integración está aislada dentro de Pedidos. |
 | DA05 API REST | Toda comunicación entre la aplicación web y el backend pasa por la API REST. |
-| DA06 Servicios externos | Cada integración se asigna a un único módulo, lo que facilita cambiar de proveedor. |
-| DA07 Mantenibilidad | Las capas y módulos separan responsabilidades; un cambio en un módulo no obliga a modificar los demás. |
+| DA06 Mantenibilidad | Las capas y módulos separan responsabilidades; un cambio en un módulo no obliga a modificar los demás. |
+| DA07 Servicios externos | Cada integración se asigna a un único módulo, lo que facilita cambiar de proveedor. |
